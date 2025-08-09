@@ -1,3 +1,4 @@
+import { categories } from "../../App"
 
 
 const ExpenseForm = () => {
@@ -17,11 +18,12 @@ const ExpenseForm = () => {
 
         <div className="mb-3">
         <label htmlFor="category" className="form-label">Category</label>
-        <select id="category"  className="form-control" >
-            
+        <select id="category"  className="form-select">
+        <option value=""></option>
+        { categories.map(category => <option key={category} value={category}> </option> )}
         </select>
         </div>
-
+        <button className="btn btn-primary">Submit</button>
       </form>
     </div>
   )
