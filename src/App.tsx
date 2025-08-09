@@ -4,21 +4,23 @@ import ExpenseFilter from "./expense-tracker/components/ExpenseFilter"
 
 
 function App() {
-  const [expenses, setExpenses] = useState(
-    [
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [expenses, setExpenses] = useState([
     {id: 1, description: 'aaa', amount: 10, category: 'utilities'},
     {id: 2, description: 'bbb', amount: 10, category: 'utilities'},
     {id: 3, description: 'ccc', amount: 10, category: 'utilities'},
     {id: 4, description: 'ddd', amount: 10, category: 'utilities'},
   ])
   
+  const visibleExpenses = selectedCategory? expenses.filter(e => e.category === selectedCategory) : expenses;
+
   return (
     <div>
       <div className="mb-3">
-        <ExpenseFilter onSelectCategory={category => console.log(category)}></ExpenseFilter>
+        <ExpenseFilter onSelectCategory={category => setSelectedCategory(category)}></ExpenseFilter>
       </div>
       
-      <ExpenseList expenses={expenses} onDelete={(id) => setExpenses(expenses.filter(e => e.id !== id))} />
+      <ExpenseList expenses={visibleExpenses} onDelete={(id) => setExpenses(expenses.filter(e => e.id !== id))} />
     </div>
       
     
